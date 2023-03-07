@@ -3,8 +3,10 @@ package space.bumtiger.SpringMVC_Model.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,10 +17,12 @@ import space.bumtiger.SpringMVC_Model.domain.Details;
 public class DetailsController {
 
 	@RequestMapping(value = "/")
-	public String viewPage(@ModelAttribute("detail") Details detail,
-			@ModelAttribute("ideNames") ArrayList<String> ideNames)
-			throws IOException {
-		ideNames.addAll(Arrays.asList("Eclipse", "IntelliJ", "NetBeans"));
+	public String viewPage(Model model) throws IOException {
+		Details detail = new Details();
+		model.addAttribute("detail", detail);
+		List<String> ideNames = new ArrayList<String>();
+		ideNames.addAll(Arrays.asList("STS 4", "IntelliJ", "NetBeans"));
+		model.addAttribute("ideNames", ideNames);
 		return "details";
 	}
 
